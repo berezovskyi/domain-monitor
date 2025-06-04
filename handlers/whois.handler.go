@@ -4,9 +4,9 @@ import (
 	"errors"
 
 	"github.com/a-h/templ"
+	"github.com/berezovskyi/domain-monitor/service"
+	"github.com/berezovskyi/domain-monitor/views/domains"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/service"
-	"github.com/nwesterhausen/domain-monitor/views/domains"
 )
 
 type WhoisHandler struct {

@@ -5,9 +5,9 @@ import (
 	"log"
 	"strings"
 
+	"github.com/berezovskyi/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/views/domains"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/configuration"
-	"github.com/nwesterhausen/domain-monitor/views/domains"
 )
 
 type DomainHandler struct {

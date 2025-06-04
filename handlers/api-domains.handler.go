@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/berezovskyi/domain-monitor/configuration"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/configuration"
 )
 
 type ApiDomainService interface {

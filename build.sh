@@ -13,7 +13,7 @@ pnpm build
 # Github Username
 USERNAME=nwesterhausen
 # Get repo part of repository by turning this
-# "https://github.com/nwesterhausen/domain-monitor" into this "domain-monitor"
+# "https://github.com/berezovskyi/domain-monitor" into this "domain-monitor"
 IMAGE_PREFIX=$(jq .repository.url package.json | cut -d\/ -f5 | cut -d\" -f1)
 # Name for this image
 IMAGE=server
@@ -59,10 +59,10 @@ podman build \
     -t "$IMAGE_BASE:$BUILDTAG" \
     -t "$IMAGE_BASE:$TAG" \
     --annotation="org.opencontainers.image.title=Domain Monitor Server" \
-    --annotation="org.opencontainers.image.documentation=https://github.com/nwesterhausen/domain-monitor" \
+    --annotation="org.opencontainers.image.documentation=https://github.com/berezovskyi/domain-monitor" \
     --annotation="org.opencontainers.image.authors=Nicholas Westerhausen <nicholas@mail.nwest.one>" \
     --annotation="org.opencontainers.image.description=A simple domain monitoring tool, which tracts the expiration date of domains and sends notifications." \
-    --annotation="org.opencontainers.image.source=https://github.com/nwesterhausen/domain-monitor" \
+    --annotation="org.opencontainers.image.source=https://github.com/berezovskyi/domain-monitor" \
     --annotation="org.opencontainers.image.license=MIT" \
     .
 

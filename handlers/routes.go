@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"github.com/a-h/templ"
+	"github.com/berezovskyi/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/service"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/configuration"
-	"github.com/nwesterhausen/domain-monitor/service"
 )
 
 func SetupRoutes(app *echo.Echo, includeConfiguration bool) {

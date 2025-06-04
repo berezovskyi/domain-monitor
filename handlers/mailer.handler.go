@@ -3,8 +3,8 @@ package handlers
 import (
 	"log"
 
+	"github.com/berezovskyi/domain-monitor/service"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/service"
 )
 
 type MailerHandler struct {

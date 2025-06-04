@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"github.com/nwesterhausen/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/configuration"
 )
 
 type ServicesWhois struct {
