@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"github.com/nwesterhausen/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/configuration"
 )
 
 type ServicesWhois struct {
@@ -15,9 +15,12 @@ func NewWhoisService(store configuration.WhoisCacheStorage) *ServicesWhois {
 	return &ServicesWhois{store: store}
 }
 
-func (s *ServicesWhois) GetWhois(fqdn string) (configuration.WhoisCache, error) {
+func (s *ServicesWhois) GetWhois(fqdn string, noCache bool) (configuration.WhoisCache, error) {
 	for _, entry := range s.store.FileContents.Entries {
 		if entry.FQDN == fqdn {
+			if noCache {
+				entry.Refresh()
+			}
 			return entry, nil
 		}
 	}

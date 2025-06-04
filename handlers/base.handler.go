@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"github.com/berezovskyi/domain-monitor/views/layout"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/views/layout"
 )
 
 type BaseHandler struct {

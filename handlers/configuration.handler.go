@@ -3,9 +3,9 @@ package handlers
 import (
 	"log"
 
+	"github.com/berezovskyi/domain-monitor/service"
+	"github.com/berezovskyi/domain-monitor/views/configuration"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/service"
-	"github.com/nwesterhausen/domain-monitor/views/configuration"
 )
 
 func HandlerRenderConfiguration(c echo.Context) error {

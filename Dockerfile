@@ -31,10 +31,10 @@ COPY --from=builder /app/assets /app/assets
 
 LABEL maintainer="Nicholas Westerhausen <nicholas@mail.nwest.one>"
 LABEL org.opencontainers.image.title="Domain Monitor Server"
-LABEL org.opencontainers.image.documentation=https://github.com/nwesterhausen/domain-monitor
+LABEL org.opencontainers.image.documentation=https://github.com/berezovskyi/domain-monitor
 LABEL org.opencontainers.image.authors="Nicholas Westerhausen <nicholas@mail.nwest.one>"
 LABEL org.opencontainers.image.description="A simple domain monitoring tool, which tracts the expiration date of domains and sends notifications."
-LABEL org.opencontainers.image.source=https://github.com/nwesterhausen/domain-monitor
+LABEL org.opencontainers.image.source=https://github.com/berezovskyi/domain-monitor
 LABEL org.opencontainers.image.license=MIT
 
 WORKDIR /app
