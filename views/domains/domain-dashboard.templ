@@ -14,13 +14,21 @@ templ DomainCard(domain configuration.Domain) {
       <div class="card-body">
         <h2 class="card-title">{ domain.Name }</h2>
         <pre>{ domain.FQDN }</pre>
-        <div hx-post="/whois/" hx-trigger="load" hx-include="this">
+        <div hx-post="/whois/" hx-trigger="load" hx-include="this" id={"whois-card-"+strings.ReplaceAll(domain.FQDN, ".", "_")}>
             <input type="hidden" name="fqdn" value={ domain.FQDN } />
         </div>
         <div class="card-actions justify-end">
-        <div class={ "badge", templ.KV("badge-outline", !domain.Enabled), templ.KV("badge-success", domain.Enabled) }>Periodic Updates</div>
-          <div class={ "badge", templ.KV("badge-outline", !domain.Alerts), templ.KV("badge-success", domain.Alerts) }>Alerts Enabled</div>
+            <div class={ "badge", templ.KV("badge-outline", !domain.Enabled), templ.KV("badge-success", domain.Enabled) }>Periodic Updates</div>
+            <div class={ "badge", templ.KV("badge-outline", !domain.Alerts), templ.KV("badge-success", domain.Alerts) }>Alerts Enabled</div>
         </div>
+        <div class="card-actions justify-end" hx-post="/whois/refresh" hx-trigger="click" hx-include="this" hx-target={"#whois-card-"+strings.ReplaceAll(domain.FQDN, ".", "_")} hx-indicator={"#indication-"+strings.ReplaceAll(domain.FQDN, ".", "_")}>
+            <div id={"indication-"+strings.ReplaceAll(domain.FQDN, ".", "_")} class="htmx-indicator">
+                <span class="loading loading-spinner loading-xs"></span>
+            </div>
+            <input type="hidden" name="fqdn" value={ domain.FQDN } />
+            <button class="btn btn-xs">Refresh</button>
+        </div>
+        
       </div>
     </div>
 }

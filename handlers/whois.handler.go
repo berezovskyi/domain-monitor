@@ -32,7 +32,25 @@ func (h *WhoisHandler) GetCard(c echo.Context) error {
 	if err != nil {
 		card = domains.WhoisError(err)
 	} else {
-	card = domains.WhoisDetail(whois)
+		card = domains.WhoisDetail(whois)
+	}
+
+	return View(c, card)
+}
+
+func (h *WhoisHandler) GetCardWithRefresh(c echo.Context) error {
+	fqdn := c.FormValue("fqdn")
+	if len(fqdn) == 0 {
+		return errors.New("invalid domain to fetch (FQDN required)")
+	}
+
+	var card templ.Component
+	whois, err := h.WhoisService.GetWhois(fqdn, true) // Force refresh
+
+	if err != nil {
+		card = domains.WhoisError(err)
+	} else {
+		card = domains.WhoisDetail(whois)
 	}
 
 	return View(c, card)

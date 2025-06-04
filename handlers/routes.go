@@ -79,6 +79,7 @@ func SetupWhoisRoutes(app *echo.Echo, ws *service.ServicesWhois) {
 	wh := NewWhoisHandler(ws)
 
 	whoisGroup.POST("/", wh.GetCard)
+	whoisGroup.POST("/refresh", wh.GetCardWithRefresh)
 }
 
 func View(c echo.Context, cmp templ.Component) error {
