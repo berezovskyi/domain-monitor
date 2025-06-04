@@ -27,7 +27,7 @@ func (h *WhoisHandler) GetCard(c echo.Context) error {
 	}
 
 	var card templ.Component
-	whois, err := h.WhoisService.GetWhois(fqdn)
+	whois, err := h.WhoisService.GetWhois(fqdn, false)
 
 	if err != nil {
 		card = domains.WhoisError(err)
