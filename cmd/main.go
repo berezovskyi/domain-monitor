@@ -10,6 +10,7 @@ import (
 	"github.com/berezovskyi/domain-monitor/configuration"
 	"github.com/berezovskyi/domain-monitor/handlers"
 	"github.com/berezovskyi/domain-monitor/service"
+	whoisparser "github.com/likexian/whois-parser"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -114,11 +115,13 @@ func domainExpirationCheckOnSchedule(whoisCache configuration.WhoisCacheStorage,
 		return
 	}
 
+	var nilEntry whoisparser.WhoisInfo
+
 	// for every domain in the domains configuration, if alerts are turned on, check the expiration from the WHOIS cache and then send an alert if one hasn't been sent.
 	for _, domain := range domains.DomainFile.Domains {
 		if domain.Alerts {
 			whoisEntry := whoisCache.Get(domain.FQDN)
-			if whoisEntry == nil {
+			if whoisEntry == nil || whoisEntry.NxDomain || whoisEntry.WhoisInfo == nilEntry || whoisEntry.WhoisInfo.Domain.ExpirationDateInTime == nil {
 				log.Printf("❌ WHOIS entry for %s not found, skipping", domain.FQDN)
 				continue
 			}
