@@ -16,10 +16,12 @@ func NewWhoisService(store configuration.WhoisCacheStorage) *ServicesWhois {
 }
 
 func (s *ServicesWhois) GetWhois(fqdn string, noCache bool) (configuration.WhoisCache, error) {
-	for _, entry := range s.store.FileContents.Entries {
+	for i, entry := range s.store.FileContents.Entries {
 		if entry.FQDN == fqdn {
 			if noCache {
-				entry.Refresh()
+				s.store.FileContents.Entries[i].Refresh()
+				s.store.Flush()
+				return s.store.FileContents.Entries[i], nil
 			}
 			return entry, nil
 		}
