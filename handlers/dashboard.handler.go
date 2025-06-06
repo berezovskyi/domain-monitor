@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"github.com/berezovskyi/domain-monitor/views/dashboard"
 	"github.com/labstack/echo/v4"
-	"github.com/nwesterhausen/domain-monitor/views/dashboard"
 )
 
 func HandlerRenderDashboard(c echo.Context) error {

@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/nwesterhausen/domain-monitor/configuration"
-	"github.com/nwesterhausen/domain-monitor/handlers"
-	"github.com/nwesterhausen/domain-monitor/service"
+	"github.com/berezovskyi/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/handlers"
+	"github.com/berezovskyi/domain-monitor/service"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -175,11 +175,11 @@ func domainExpirationCheckOnSchedule(whoisCache configuration.WhoisCacheStorage,
 					continue
 				}
 				whoisEntry.MarkAlertSent(configuration.AlertDaily)
+			}
 		}
 	}
-}
 
-time.AfterFunc(interval, func() { domainExpirationCheckOnSchedule(whoisCache, domains, mailer, appConfig, interval) })
+	time.AfterFunc(interval, func() { domainExpirationCheckOnSchedule(whoisCache, domains, mailer, appConfig, interval) })
 }
 
 // Refresh the whois cache on a schedule, and flush the cache. This runs every 6 hours.

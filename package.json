@@ -2,7 +2,7 @@
   "version": "1.2.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nwesterhausen/domain-monitor"
+    "url": "https://github.com/berezovskyi/domain-monitor"
   },
   "scripts": {
     "build": "pnpm build:htmx && pnpm build:hyperscript && pnpm build:tailwind",

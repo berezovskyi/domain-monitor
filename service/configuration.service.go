@@ -5,7 +5,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/nwesterhausen/domain-monitor/configuration"
+	"github.com/berezovskyi/domain-monitor/configuration"
 )
 
 type ConfigurationService struct {
@@ -172,7 +172,6 @@ func (s *ConfigurationService) SetConfigurationValue(section string, key string,
 		log.Println("🚨 Configuration editing is disabled in config.yaml")
 		return errors.New("configuration editing is disabled")
 	}
-
 
 	stringVal, ok := value.(string)
 	if !ok {
