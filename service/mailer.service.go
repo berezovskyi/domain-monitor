@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
@@ -72,7 +73,20 @@ func (m *MailerService) TestMail(to string) error {
 	msg.SetBodyString(mail.TypeTextPlain, "This is a test e-mail from the Domain Monitor application. If you received this, it's working! 🎉")
 
 	if err := m.client.DialAndSend(msg); err != nil {
-		log.Printf("failed to deliver mail: %s", err)
+		// Check if this is an SMTP RESET error after successful delivery
+		var sendErr *mail.SendError
+		var errParsed = errors.As(err, &sendErr)
+		if errParsed && sendErr.Reason == mail.ErrSMTPReset {
+			// https://github.com/wneessen/go-mail/issues/463
+			log.Printf("⚠️ Mail delivered successfully but SMTP RESET failed: %s", err)
+			log.Printf("📧 E-mail message sent to " + to)
+			return nil // Don't treat this as a delivery failure since mail was sent
+		}
+		if errParsed {
+			log.Printf("❌ failed to deliver mail: %s (reason: 0x%X)", err, sendErr.Reason)
+		} else {
+			log.Printf("❌ failed to deliver mail: %s (reason: n/a)", err)
+		}
 		return err
 	}
 	log.Printf("📧 E-mail message sent to " + to)
@@ -97,7 +111,20 @@ func (m *MailerService) SendAlert(to string, fqdn string, alert configuration.Al
 	msg.SetBodyString(mail.TypeTextPlain, body)
 
 	if err := m.client.DialAndSend(msg); err != nil {
-		log.Printf("❌ failed to deliver mail: %s", err)
+		// Check if this is an SMTP RESET error after successful delivery
+		var sendErr *mail.SendError
+		var errParsed = errors.As(err, &sendErr)
+		if errParsed && sendErr.Reason == mail.ErrSMTPReset {
+			// https://github.com/wneessen/go-mail/issues/463
+			log.Printf("⚠️ Mail delivered successfully but SMTP RESET failed: %s", err)
+			log.Printf("📧 E-mail message sent to " + to)
+			return nil // Don't treat this as a delivery failure since mail was sent
+		}
+		if errParsed {
+			log.Printf("❌ failed to deliver mail: %s (reason: 0x%X)", err, sendErr.Reason)
+		} else {
+			log.Printf("❌ failed to deliver mail: %s (reason: n/a)", err)
+		}
 		return err
 	}
 

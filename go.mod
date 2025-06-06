@@ -10,7 +10,7 @@ require (
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/likexian/whois v1.15.1
 	github.com/likexian/whois-parser v1.24.11
-	github.com/wneessen/go-mail v0.4.1
+	github.com/wneessen/go-mail v0.6.2
 	gopkg.in/yaml.v3 v3.0.1
 )
 
